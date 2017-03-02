@@ -1,9 +1,16 @@
 var Todos = require('../models/todoModel');
 var bodyParser = require('body-parser');
 
+// Middleware
+var myLogger = function (req, res, next) {
+    console.log('LOGGED');
+    next();
+}
+
 module.exports = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(myLogger);
 
     app.get('/api/todos/:uname', function(req, res) {
         Todos.find({ username: req.params.uname }, function(err, todos) {
