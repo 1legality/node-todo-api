@@ -10,8 +10,8 @@ var myLogger = function (req, res, next) {
 module.exports = function(app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(myLogger);
-
+    app.use('/api/todo*', myLogger); 
+    
     app.get('/api/todos/:uname', function(req, res) {
         Todos.find({ username: req.params.uname }, function(err, todos) {
             if (err) throw err;

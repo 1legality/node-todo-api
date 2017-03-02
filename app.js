@@ -16,4 +16,8 @@ mongoose.connect(config.getDbConnectionString());
 setupController(app);
 apiController(app);
 
+app.get('*', function(rwq, res) {
+    res.status(404).send('404 not found ;_;');
+})
+
 app.listen(port);
